@@ -42,7 +42,7 @@ const AddScorecard = () => {
             navigate('/login');
         }
         else{
-            if(user.userrole.toLowerCase()!='tournamentmanager'&&user.userrole.toLowerCase()=="datamanager" && user.userrole.toLowerCase()!='admin'){
+            if(user.userrole.toLowerCase()!='tournamentmanager'&&user.userrole.toLowerCase()!="datamanager" && user.userrole.toLowerCase()!='admin'){
                 toast.error('You are not authorized to view this page');
                 navigate('/');
             }

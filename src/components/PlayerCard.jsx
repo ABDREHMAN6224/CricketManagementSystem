@@ -32,7 +32,7 @@ const PlayerCard = ({player,match_id,type,setTeamPlayersInfo,label="Add Record"}
     <div className='flex items-center gap-5 justify-center mx-2'>
         <p className="m-0 p-0">Runs:<span className='pl-1'>{p?.runs?`(${p.runs} / ${p.balls})`:"0/0"}</span></p>
         <p className="m-0 p-0">Wickets:<span className='pl-1'>{p?.wickets?`(${p.runs_given} - ${p.wickets})`:"0-0"}</span></p>
-        <p className="m-0 p-0">SR:<span className='pl-1'>{p?.runs?(p.runs/p.balls).toFixed(2):"0.00"}</span></p>
+        <p className="m-0 p-0">SR:<span className='pl-1'>{p?.runs?((p.runs/p.balls)*100).toFixed(2):"0.00"}</span></p>
         <p className="m-0 p-0">Eco:<span className='pl-1'>{p?.overs?(p.runs_given/p.overs).toFixed(2):"0.00"}</span></p>
         
     </div>

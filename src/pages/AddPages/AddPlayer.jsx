@@ -47,7 +47,7 @@ const AddPlayer = () => {
             navigate('/login');
         }
         else{
-            if(user.userrole.toLowerCase()!='playermanager'&&user.userrole.toLowerCase()=="datamanager" && user.userrole.toLowerCase()!='admin'){
+            if(user.userrole.toLowerCase()!='playermanager'&&user.userrole.toLowerCase()!="datamanager" && user.userrole.toLowerCase()!='admin'){
                 toast.error('You are not authorized to view this page');
                 navigate('/');
             }
@@ -56,7 +56,7 @@ const AddPlayer = () => {
         dispatch(getAllTeams());
     },[])
     useEffect(()=>{
-        if(allCountries.length>0 && allTeams.length>0){
+        if(allCountries.length>0){
             //set those countries to be available whose teams are available
             let temp=allCountries;
             // allCountries.forEach(country=>{

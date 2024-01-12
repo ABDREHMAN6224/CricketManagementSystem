@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MdOutlineCameraAlt } from "react-icons/md";
 import { customFetch } from '../../customeFetch';
 
@@ -8,6 +8,7 @@ const PictureInput = ({hoverLabel,picture,setPicture,w=40,h=40,disabled=false,sm
     const handleUpdatePicture=(e)=>{
     const pic=e.target.files[0];
     const picUrl=URL.createObjectURL(pic);
+    setPicture(picUrl);
     const formData=new FormData();
     setPic(picUrl);
     formData.append('file',pic);
@@ -17,7 +18,6 @@ const PictureInput = ({hoverLabel,picture,setPicture,w=40,h=40,disabled=false,sm
     }
     uploadPicture();
   }
-  
   return (
   <div className={small?"flex w-[7rem] h-[7rem] flex-col items-center justify-center rounded-full bg-gray-300 relative":"flex w-40 h-40 flex-col items-center justify-center rounded-full bg-gray-300 relative"} onMouseOver={()=>setShow(true)} onMouseLeave={()=>setShow(false)}>
                       <img className={small?"w-[7rem] h-[7rem] object-cover rounded-full":"w-40 h-40 object-cover rounded-full"} src={pic||picture} alt="" />

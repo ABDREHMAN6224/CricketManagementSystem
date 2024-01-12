@@ -46,7 +46,7 @@ const AddMatch = () => {
             navigate('/login');
         }
         else{
-            if(user.userrole.toLowerCase()!='tournamentmanager'&&user.userrole.toLowerCase()=="datamanager" && user.userrole.toLowerCase()!='admin'){
+            if(user.userrole.toLowerCase()!='tournamentmanager'&&user.userrole.toLowerCase()!="datamanager" && user.userrole.toLowerCase()!='admin'){
                 toast.error('You are not authorized to view this page');
                 navigate('/');
             }
@@ -127,14 +127,14 @@ const AddMatch = () => {
     }
   },[allTournaments])
 
-  useEffect(()=>{
-    if(error){
-      toast.error("Please add atleast 2 teams to register a match");
-      setTimeout(()=>{
-        navigate('/addTeam');
-      },2000)
-    }
-  },[error])
+  // useEffect(()=>{
+  //   if(error){
+  //     toast.error("Please add atleast 2 teams to register a match");
+  //     setTimeout(()=>{
+  //       navigate('/addTeam');
+  //     },2000)
+  //   }
+  // },[error])
 
   const handleSave=()=>{
 
@@ -214,6 +214,17 @@ const AddMatch = () => {
     let matchExists=allMatches.find(match=>(match.team1id==team1id || match.team1id==team2id) && (match.team2id==team2id || match.team2id==team1id) && dayjs(match.date).format('YYYY-MM-DD')==dayjs(date).format('YYYY-MM-DD'));
     if(matchExists){
       toast.error(`${team1} vs ${team2} match already exists on this date`);
+      return;
+    }
+    //check if team1 or team has match on that date
+    let team1Matches=allMatches.filter(match=>(match.team1id==team1id || match.team2id==team1id) && dayjs(match.date).format('YYYY-MM-DD')==dayjs(date).format('YYYY-MM-DD'));
+    let team2Matches=allMatches.filter(match=>(match.team1id==team2id || match.team2id==team2id) && dayjs(match.date).format('YYYY-MM-DD')==dayjs(date).format('YYYY-MM-DD'));
+    if(team1Matches.length>0){
+      toast.error(`${team1} has a match on this date`);
+      return;
+    }
+    if(team2Matches.length>0){
+      toast.error(`${team2} has a match on this date`);
       return;
     }
     setLoad(true);

@@ -39,7 +39,7 @@ const InningsTable = ({playerInnings,match=false}) => {
                                     <tr key={index} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                                     <td className="px-6 py-4">
                                     <div className="flex items-center space-x-3">
-                                    <p className="m-0 text-gray-900 dark:text-white">{op1.toLowerCase()==teamname.toLowerCase()?op2:op1}</p>
+                                    <p className="m-0 text-gray-900 dark:text-white">{op1?.toLowerCase()==teamname?.toLowerCase()?op2:op1}</p>
                                     </div>
                                     </td>
                                     <td className="px-6 py-4">

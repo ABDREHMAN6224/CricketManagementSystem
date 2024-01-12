@@ -52,6 +52,11 @@ const AllRounderModal = ({open,onClose,loading,allRounder}) => {
       toast.error('Rank should be greater than 0');
       return;
     }
+    //check if rank jump is not greater than 5
+    if(Math.abs(allrounderRank-allrounderrank)>3){
+      toast.error('Rank jump should not be greater than 3');
+      return;
+    }
     if(picture!=playerpicpath){
       dispatch(setAllrounderPicture({id:playerid,picture}));
     }

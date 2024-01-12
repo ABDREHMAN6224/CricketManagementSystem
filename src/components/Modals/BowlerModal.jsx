@@ -43,12 +43,21 @@ const BowlerModal = ({open,onClose,loading,bowler}) => {
       }, 3000);
       return;
     }
-    if(playerName==''||bowlHand==''||playerStatus==''||bowlType==''){
+    if(picture==""){
+      toast.error('Please select a picture');
+      return;
+    }
+    if(playerName==''||bowlHand==''||playerStatus==''||bowlType==''||picture==''){
       toast.error('Please fill all the fields');
       return;
     }
     if(bowlingRank<=0){
       toast.error('Rank should be greater than 0');
+      return;
+    }
+    //check if rank jump is not greater than 5
+    if(Math.abs(bowlingRank-bowlingrank)>3){
+      toast.error('Rank jump should not be greater than 3');
       return;
     }
     if(picture!=playerpicpath){

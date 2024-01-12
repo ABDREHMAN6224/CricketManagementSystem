@@ -27,6 +27,8 @@ const getUniqueTeams=(allBatsman)=>{
             uniqueTeams.push(batsman.teamname);
         }
     })
+    //remove any null values
+    uniqueTeams=uniqueTeams.filter(team=>team);
     return uniqueTeams;
 }
 const getUniqueCountries=(allBatsman)=>{
@@ -38,6 +40,7 @@ const getUniqueCountries=(allBatsman)=>{
     })
     //remove any null values
     uniqueCountries=uniqueCountries.filter(country=>country);
+    
     return uniqueCountries;
 }
 const Filters = () => {

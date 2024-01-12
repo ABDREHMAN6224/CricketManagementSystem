@@ -34,7 +34,7 @@ const AddCaptain = () => {
             navigate('/login');
         }
         else{
-            if(user.userrole.toLowerCase()!='teammanager'&&user.userrole.toLowerCase()=="datamanager" && user.userrole.toLowerCase()!='admin'){
+            if(user.userrole.toLowerCase()!='teammanager'&&user.userrole.toLowerCase()!="datamanager" && user.userrole.toLowerCase()!='admin'){
                 toast.error('You are not authorized to view this page');
                 navigate('/');
             }
@@ -55,6 +55,7 @@ const AddCaptain = () => {
             //remove players already registered as captain
             let players=allPlayers.filter(player=>!allCaptains.find(captain=>captain.playerid==player.playerid));
             setAllPlayersForTeam(players.filter(player=>player.country?.toLowerCase()==team?.toLowerCase()));
+            players=players.filter(player=>player.country?.toLowerCase()==team?.toLowerCase());
             setTotalMatchesAsCaptain(0);
             setTotalWins(0);
             let player=players[0];
@@ -106,8 +107,7 @@ const AddCaptain = () => {
         toast.success('Registered successfully');
         setTimeout(()=>{
             setLoad(false);
-            navigate("/captains")
-            
+            window.location.reload();           
         },2000);
         
     }

@@ -40,7 +40,10 @@ const BatsmanModal = ({open,onClose,loading,batsman}) => {
       }, 3000);
       return;
     }
-
+    if(picture==""){
+      toast.error('Please select a picture');
+      return;
+    }
     if(playerName.trim()==''||batHand.trim()==''||playerStatus.trim()==''){
       toast.error('Please fill all the fields');
       return;
@@ -49,6 +52,12 @@ const BatsmanModal = ({open,onClose,loading,batsman}) => {
       toast.error('Rank should be greater than 0');
       return;
     }
+    //check if rank jump is not greater than 5
+    if(Math.abs(battingRank-battingrank)>3){
+      toast.error('Rank jump should not be greater than 3');
+      return;
+    }
+
     if(picture!=playerpicpath){
       dispatch(setBatsmanPicture({id:playerid,picture}));
       dispatch(updatePlayerPicture({id:playerid,picturePath:picture}));

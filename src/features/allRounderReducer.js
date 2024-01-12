@@ -85,7 +85,7 @@ const allRounderSlice = createSlice({
                 filteredAllRounders = filteredAllRounders.filter(allRounder => allRounder.playername.toLowerCase().startsWith(filters.search));
             }
             if (filters.team !== "all") {
-                filteredAllRounders = filteredAllRounders.filter(allRounder => allRounder.teamname.toLowerCase() === filters.team);
+                filteredAllRounders = filteredAllRounders.filter(allRounder => allRounder.teamname?.toLowerCase() === filters.team);
             }
             if (filters.status !== "all") {
                 filteredAllRounders = filteredAllRounders.filter(allRounder => allRounder.playerstatus.toLowerCase() === filters.status);
@@ -142,32 +142,33 @@ const allRounderSlice = createSlice({
                 
                 });
             }
-            if (filters.sort3 === "Medium") {
-                filteredAllRounders = filteredAllRounders.filter(allRounder => allRounder.bowltype === "Medium");
+            if (filters.sort3.toLowerCase() === "medium") {
+            
+                filteredAllRounders = filteredAllRounders.filter(allRounder => allRounder.bowltype.toLowerCase() == "medium");
             }
-            if (filters.sort3 === "Fast") {
-                filteredAllRounders = filteredAllRounders.filter(allRounder => allRounder.bowltype === "Fast");
+            if (filters.sort3.toLowerCase() === "fast") {
+                filteredAllRounders = filteredAllRounders.filter(allRounder => allRounder.bowltype.toLowerCase() == "fast");
             }
-            if (filters.sort3 === "Off-Spin") {
-                filteredAllRounders = filteredAllRounders.filter(allRounder => allRounder.bowltype === "Off-Spin");
+            if (filters.sort3.toLowerCase() === "off-spin") {
+                filteredAllRounders = filteredAllRounders.filter(allRounder => allRounder.bowltype.toLowerCase() == "off-spin");
             }
-            if (filters.sort3 === "Leg-Spin") {
-                filteredAllRounders = filteredAllRounders.filter(allRounder => allRounder.bowltype === "Leg-Spin");
+            if (filters.sort3.toLowerCase() === "leg-spin") {
+                filteredAllRounders = filteredAllRounders.filter(allRounder => allRounder.bowltype.toLowerCase() == "leg-spin");
             }
             if (filters.sort2 === "left-hand") {
-                filteredAllRounders = filteredAllRounders.filter(allRounder => allRounder.bathand.toLowerCase() === "left");
+                filteredAllRounders = filteredAllRounders.filter(allRounder => allRounder.bathand.toLowerCase() == "left");
             }
             if (filters.sort2 === "right-hand") {
-                filteredAllRounders = filteredAllRounders.filter(allRounder => allRounder.bathand.toLowerCase() === "right");
+                filteredAllRounders = filteredAllRounders.filter(allRounder => allRounder.bathand.toLowerCase() == "right");
             }
-            if (filters.sort2 === "left-arm") {
-                filteredAllRounders = filteredAllRounders.filter(allRounder => allRounder.bowlhand.toLowerCase() === "left");
+            if (filters.sort2 == "left-arm") {
+                filteredAllRounders = filteredAllRounders.filter(allRounder => allRounder.bowlhand.toLowerCase() == "left");
             }
-            if (filters.sort2 === "right-arm") {
-                filteredAllRounders = filteredAllRounders.filter(allRounder => allRounder.bowlhand.toLowerCase() === "right");
+            if (filters.sort2 == "right-arm") {
+                filteredAllRounders = filteredAllRounders.filter(allRounder => allRounder.bowlhand.toLowerCase() == "right");
             }
             if (filters.country !== "all") {
-                filteredAllRounders = filteredAllRounders.filter(allRounder => allRounder.country.toLowerCase() === filters.country);
+                filteredAllRounders = filteredAllRounders.filter(allRounder => allRounder.country.toLowerCase() == filters.country);
             }
             state.filteredAllRounders = filteredAllRounders;
         },

@@ -133,6 +133,11 @@ const TeamModal = ({open,onClose,loading,team}) => {
       toast.error('Rank should be greater than 0');
       return;
     }
+    //check if rank jump is not greater than 5
+    if(Math.abs(t20iRank-t20irank)>3 || Math.abs(odiRank-odirank)>3 || Math.abs(testRank-testrank)>3){
+      toast.error('Rank jump should not be greater than 3');
+      return;
+    }
     //check if team name already exists
     let teamNameExists=allTeams.find(team=>team.teamname==teamName && team.teamid!=teamid);
     if(teamNameExists){

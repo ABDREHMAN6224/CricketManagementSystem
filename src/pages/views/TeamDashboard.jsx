@@ -32,7 +32,7 @@ const TeamDashboard = () => {
             <RankingCard players={topTeams.map(p=>({...p,rank:p?.t20irank}))} type={"T20"} teams/>
     </div>
           <div className='w-full flex gap-0 items-center justify-center py-1'>
-            <AreaChartComp data={matchesVsWins.sort((a,b)=>b.matches-a.matches).slice(0,15)} h={false} w={1350} x={"matches"} xdata={"name"} y={"wins"} name={"Matches vs Wins"} m={true} />
+            <AreaChartComp data={matchesVsWins?.sort((a,b)=>b.wins-a.wins).slice(0,15)} h={false} w={1350} x={"matches"} xdata={"name"} y={"wins"} name={"Matches vs Wins"} m={true} />
           </div>
 
 

@@ -12,7 +12,8 @@ const initialState = {
         search: "",
         team: "all",
         sort: "all",
-        status: "all"
+        status: "all",
+        registered: "all"
     }
 }
 export const getAllWicketKeepers = createAsyncThunk("wicketKeeper/getAllWicketKeepers", async (data, thunkAPI) => {
@@ -88,12 +89,16 @@ const wicketKeeperSlice = createSlice({
         updateStatus: (state, action) => {
             state.filters.status = action.payload;
         },
+        updateRegistered: (state, action) => {
+            state.filters.registered = action.payload;
+        },
         resetFilters: (state, action) => {
             state.filters = {
                 search: "",
                 team: "all",
                 sort: "all",
-                status: "all"
+                status: "all",
+                registered: "all"
             }
         },
         updateFilteredWicketKeepers: (state, action) => {
@@ -103,6 +108,9 @@ const wicketKeeperSlice = createSlice({
             }
             if (state.filters.team !== "all") {
                 filteredWicketKeepers = filteredWicketKeepers.filter((wicketKeeper) => wicketKeeper.teamname == state.filters.team);
+            }
+            if(state.filters.registered!=="all"){
+                filteredWicketKeepers=filteredWicketKeepers.filter((wicketKeeper)=>wicketKeeper.country?.toLowerCase()==state.filters.registered.toLowerCase());
             }
             if (state.filters.sort == "stumps-desc") {
                 filteredWicketKeepers = filteredWicketKeepers.sort((a, b) => b.totalstumps - a.totalstumps);
@@ -206,5 +214,5 @@ const wicketKeeperSlice = createSlice({
 
     }
 })
-export const { updateSearch, updateTeam, updateSort, updateStatus, resetFilters, updateFilteredWicketKeepers,setCurrentWicketKeeper,deleteCurrentWicketKeeper,updateCurrentWicketKeeper } = wicketKeeperSlice.actions;
+export const { updateSearch, updateTeam, updateSort,updateRegistered, updateStatus, resetFilters, updateFilteredWicketKeepers,setCurrentWicketKeeper,deleteCurrentWicketKeeper,updateCurrentWicketKeeper } = wicketKeeperSlice.actions;
 export default wicketKeeperSlice.reducer;

@@ -130,7 +130,7 @@ const MainNav = () => {
   </div>
   <div className="navbar-end">
     <div className="navbar-item flex items-center gap-4">
-      <p className='m-0 p-0 mr-4 font-bold text-gray-600'>
+      <p className='m-0 p-0 mr-4 font-bold text-gray-600 capitalize'>
         {user?.userrole}
       </p>
       {user?.userrole.toLowerCase()=="admin"||user?.userrole.toLowerCase()=="playermanager"||user?.userrole.toLowerCase()=="teammanager"?

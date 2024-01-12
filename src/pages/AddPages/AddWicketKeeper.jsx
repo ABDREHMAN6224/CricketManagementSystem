@@ -10,11 +10,13 @@ import SelectInput from '../../components/inputs/SelectInput';
 import TextInput from '../../components/inputs/TextInput';
 import keeper from "../../images/keeper.jpeg"
 import HeroImage from '../../components/HeroImage';
+import { getAllCountries } from '../../features/countryReducer';
 const AddWicketKeeper = () => {
   const [allAvailableTeams,setAllAvailableTeams]=useState([]);
     const {allTeams}=useSelector(state=>state.team);
     const {allPlayers}=useSelector(state=>state.player);
     const {isError,allWicketKeepers}=useSelector(state=>state.wicketKeeper);
+    const {allCountries}=useSelector(state=>state.country);
     const [allPlayersForTeam,setAllPlayersForTeam]=useState([]);
     const [playerName,setPlayerName]=useState('');
     const [playerId,setPlayerId]=useState(null);
@@ -32,19 +34,20 @@ const AddWicketKeeper = () => {
             navigate('/login');
         }
         else{
-            if(user.userrole.toLowerCase()!='teammanager'&&user.userrole.toLowerCase()=="datamanager" && user.userrole.toLowerCase()!='admin'){
+            if(user.userrole?.toLowerCase()!='teammanager'&&user.userrole?.toLowerCase()!="datamanager" && user.userrole?.toLowerCase()!='admin'){
                 toast.error('You are not authorized to view this page');
                 navigate('/');
             }
         }      dispatch(getAllWicketKeepers());
+        dispatch(getAllCountries());
         dispatch(getAllTeams());
         dispatch(getAllPlayers());
     },[])
     useEffect(()=>{
-        if(allTeams.length>0){
-            setAllAvailableTeams(allTeams.map(team=>team.teamname));
-            let id=allTeams[0].teamid;
-            setTeam(allTeams[0].teamname);
+        if(allCountries.length>0){
+            setAllAvailableTeams(allCountries.map(team=>team.country));
+            let id=allCountries[0].countryid;
+            setTeam(allCountries[0].country);
             setTeamId(id);
         }
     },[allTeams])
@@ -52,7 +55,7 @@ const AddWicketKeeper = () => {
         if(allPlayers.length>0){
             //remove players already registered as wicket keepers
             let players=allPlayers.filter(player=>!allWicketKeepers.find(wicketKeeper=>wicketKeeper.playerid==player.playerid));
-            setAllPlayersForTeam(players.filter(player=>player.country.toLowerCase()===team.toLowerCase()));
+            setAllPlayersForTeam(players.filter(player=>player.country?.toLowerCase()===team?.toLowerCase()));
             setTotalCatches(0);
             setTotalStumps(0);
             let player=players.filter(player=>player?.teamid===teamId)[0];
@@ -69,7 +72,7 @@ const AddWicketKeeper = () => {
     const handleTeamChange=(e)=>{
         let team=e.target.value;
         setTeam(team);
-        let id=allTeams.find(t=>t.teamname==team)?.teamid;
+        let id=allCountries.find(t=>t.country==team)?.countryid;
         setTeamId(id);
     }
     const handlePlayerChange=(e)=>{

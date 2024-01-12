@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import LoginPage from './pages/LoginPage'
-import { RouterProvider, createBrowserRouter, useNavigate } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter} from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import Batsman from './pages/Batsman';
 import Bowler from './pages/Bowler';
@@ -24,7 +24,6 @@ import AddMatch from './pages/AddPages/AddMatch';
 import Addteam from './pages/AddPages/Addteam';
 import AddScorecard from './pages/AddPages/AddScorecard';
 import ReadTournament from './pages/ReadPages/ReadTournament';
-import ReadBatsman from './pages/ReadPages/ReadBatsman';
 import ReadPlayer from './pages/ReadPages/ReadPlayer';
 import ReadMatch from './pages/ReadPages/ReadMatch';
 import ReadTeam from './pages/ReadPages/ReadTeam';

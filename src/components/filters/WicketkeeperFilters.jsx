@@ -4,7 +4,8 @@ import SearchInput from '../inputs/SearchInput'
 import SelectInput from '../inputs/SelectInput'
 import Sorting from '../inputs/Sorting'
 import { useDispatch, useSelector } from 'react-redux'
-import { resetFilters, updateSearch, updateSort, updateStatus, updateTeam } from '../../features/wicketKeeperReducers'
+import { resetFilters, updateRegistered, updateSearch, updateSort, updateStatus, updateTeam } from '../../features/wicketKeeperReducers'
+import { getAllCountries } from '../../features/countryReducer'
 
 const sortingOptions=[
     {label:"All",value:"all"},
@@ -19,11 +20,25 @@ const WicketkeeperFilters = () => {
     const [teams,setTeams]=useState([]);
     const [status,setStatus]=useState('all');
     const [sort,setSort]=useState('all');
+    const [registered,setRegistered]=useState('all');
+    const [registeredTeams,setRegisteredTeams]=useState([]);
     const {allWicketKeepers}=useSelector(state=>state.wicketKeeper);
+    const {allCountries}=useSelector(state=>state.country);
     const dispatch=useDispatch();
-    const getAllCountries=()=>{
+    useEffect(()=>{
+        dispatch(getAllCountries());
+    },[])
+    const getAllCountris=()=>{
         let uniqueCountries=['all'];
         let countries=allWicketKeepers.map(wicketKeeper=>wicketKeeper.teamname);
+        uniqueCountries=[...new Set([...uniqueCountries,...countries])];
+        //remove any null values
+        uniqueCountries=uniqueCountries.filter(country=>country);
+        return uniqueCountries;
+    }
+    const getCountries=()=>{
+        let uniqueCountries=['all'];
+        let countries=allCountries.map(wicketKeeper=>wicketKeeper.country);
         uniqueCountries=[...new Set([...uniqueCountries,...countries])];
         //remove any null values
         uniqueCountries=uniqueCountries.filter(country=>country);
@@ -34,10 +49,12 @@ const WicketkeeperFilters = () => {
         setTeam('all');
         setStatus('all');
         setSort('all');
+        setRegistered('all');
         dispatch(resetFilters());
     }
     useEffect(()=>{
-        setTeams(getAllCountries());
+        setTeams(getAllCountris());
+        setRegisteredTeams(getCountries());
     },[allWicketKeepers])
     useEffect(()=>{
         dispatch(updateSearch(search));      
@@ -51,6 +68,9 @@ const WicketkeeperFilters = () => {
     useEffect(()=>{
         dispatch(updateSort(sort));
     },[sort])
+    useEffect(()=>{
+        dispatch(updateRegistered(registered));
+    },[registered])
 
   return (
     <Wrapper>
@@ -58,6 +78,7 @@ const WicketkeeperFilters = () => {
         <SearchInput placeholder={"Search"} label={"Search"} value={search} onChange={(e)=>setSearch(e.target.value)} />
         <SelectInput value={team} onChange={(e)=>setTeam(e.target.value)} options={teams} label={"Team"}/>
         <SelectInput value={status} onChange={(e)=>setStatus(e.target.value)} options={["all","active","retired"]} label={"Status"}/>
+        <SelectInput value={registered} onChange={(e)=>setRegistered(e.target.value)} options={registeredTeams} label={"Registered Teams"}/>
         <Sorting options={sortingOptions} value={sort} onChange={(e)=>setSort(e.target.value)} />
         <button className='btn btn-error' onClick={()=>reset()}>Reset Filters</button>
 

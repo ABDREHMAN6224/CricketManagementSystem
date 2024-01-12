@@ -115,13 +115,13 @@ const batsmanSlice = createSlice({
             const filters = state.filters;
             let filteredBatsman = state.allBatsman;
             if (filters.search !== "") {
-                filteredBatsman = filteredBatsman.filter((batsman) => batsman.playername.toLowerCase().startsWith(filters.search.toLowerCase()));
+                filteredBatsman = filteredBatsman.filter((batsman) => batsman.playername?.toLowerCase().startsWith(filters.search.toLowerCase()));
             }
             if (filters.team !== "all") {
-                filteredBatsman = filteredBatsman.filter((batsman) => batsman.teamname.toLowerCase() == filters.team);
+                filteredBatsman = filteredBatsman.filter((batsman) => batsman?.teamname?.toLowerCase() == filters.team);
             }
             if (filters.status !== "all") {
-                filteredBatsman = filteredBatsman.filter((batsman) => batsman.playerstatus.toLowerCase() == filters.status);
+                filteredBatsman = filteredBatsman.filter((batsman) => batsman.playerstatus?.toLowerCase() == filters.status);
             }
             if (filters.sort === "batting-avg-high-low") {
 

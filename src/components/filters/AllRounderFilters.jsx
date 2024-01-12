@@ -36,6 +36,8 @@ const getUniqueTeams=(allRounders)=>{
             uniqueTeams.push(allRounder.teamname);
         }
     })
+    //remove any null values
+    uniqueTeams=uniqueTeams.filter(team=>team);
     return uniqueTeams;
 }
 const getUniqueCountries=(allRounders)=>{

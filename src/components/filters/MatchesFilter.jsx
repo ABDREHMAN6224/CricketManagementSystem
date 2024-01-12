@@ -121,6 +121,7 @@ padding-right: 2rem;
 display: flex;
 flex-direction: column;
 gap: 2rem;
+max-width: 16rem;
 h3{
     position: relative;
     width: fit-content;

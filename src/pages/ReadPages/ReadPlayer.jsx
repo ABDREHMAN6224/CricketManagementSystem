@@ -69,9 +69,9 @@ const ReadPlayer = () => {
     <Wrapper className='grid place-items-center read w-full'>
           <div className="image absolute inset-0 w-full h-full"></div>
           <div className="">
-          <SinglePlayerCard player={type=="Batsman"?currentBatsman:type=="Bowler"?currentBowler:currentAllRounder} fifers={fifers} fifties={fifties}
+          <SinglePlayerCard player={type?.toLowerCase()=="batsman"?currentBatsman:type?.toLowerCase()=="bowler"?currentBowler:currentAllRounder} fifers={fifers} fifties={fifties}
           hundreds={hundreds} highestScore={highestScore} bestBowlingFigures={bestbowling}
-          playerInnings={type=="Batsman"?currentBatsmanInnings:type=="Bowler"?currentBowlerPerformances:allRounderPerformance}
+          playerInnings={type?.toLowerCase()=="batsman"?currentBatsmanInnings:type?.toLowerCase()=="bowler"?currentBowlerPerformances:allRounderPerformance}
           />
           </div>
     </Wrapper>

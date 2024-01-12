@@ -88,6 +88,9 @@ export const createTeam = createAsyncThunk("team/createTeam", async (data, thunk
                 Authorization: `Bearer ${thunkAPI.getState().auth.user?.token}`,
             },
         });
+        console.log('====================================');
+        console.log(response.data[0]);
+        console.log('====================================');
         thunkAPI.dispatch(getAllTeams());
         return response.data;
     } catch (error) {
@@ -188,7 +191,7 @@ export const updateTeamRank = createAsyncThunk("team/updateTeamRank", async (dat
 })
 export const updatePlayerTeam = createAsyncThunk("team/updatePlayerTeam", async (data, thunkAPI) => {
     try {
-        await customFetch.post(`team/updatePlayerTeam/${data.teamId}/${data.playerId}`,{
+        await customFetch.post(`team/updatePlayerTeam/${data.teamId}/${data.playerId}`,{},{
             headers: {
                 Authorization: `Bearer ${thunkAPI.getState().auth.user?.token}`,
             },

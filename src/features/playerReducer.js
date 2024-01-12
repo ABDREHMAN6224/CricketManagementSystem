@@ -19,7 +19,7 @@ export const getAllPlayers = createAsyncThunk("player/getAllPlayers", async (dat
 });
 export const deletePlayer = createAsyncThunk("player/deletePlayer", async (data, thunkAPI) => {
     try {
-        const response = await customFetch.delete(`player/player/${data.playerid}`,data,{
+        const response = await customFetch.post(`player/player/${data.playerid}`,data,{
             headers: {
                 Authorization: `Bearer ${thunkAPI.getState().auth.user?.token}`,
             },
@@ -55,7 +55,7 @@ export const updateNumberOfMatches = createAsyncThunk("player/updateNumberOfMatc
 });
 export const updateStats = createAsyncThunk("player/updateStats", async (data, thunkAPI) => {
     try {
-        const response = await customFetch.put(`player/updateStats/${data}`,{
+        const response = await customFetch.put(`player/updateStats/${data}`,{},{
             headers: {
                 Authorization: `Bearer ${thunkAPI.getState().auth.user?.token}`,
             },

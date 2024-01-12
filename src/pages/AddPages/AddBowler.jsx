@@ -23,7 +23,7 @@ const AddBowler = ({totalMatches,player,handleCancel,setPlayer,error,setComplete
             navigate('/login');
         }
         else{
-            if(user.userrole.toLowerCase()!='playermanager'&&user.userrole.toLowerCase()=="datamanager" && user.userrole.toLowerCase()!='admin'){
+            if(user.userrole.toLowerCase()!='playermanager'&&user.userrole.toLowerCase()!="datamanager" && user.userrole.toLowerCase()!='admin'){
                 toast.error('You are not authorized to view this page');
                 navigate('/');
             }

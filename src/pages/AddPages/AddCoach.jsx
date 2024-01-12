@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import coachimage from "../../images/coach.jpeg"
 import { toast } from 'react-toastify';
-import { createCoach } from '../../features/coachesReducer';
+import { createCoach, getAllCoaches } from '../../features/coachesReducer';
 import HeroImage from '../../components/HeroImage';
 
 const AddCoach = () => {
@@ -15,17 +15,19 @@ const AddCoach = () => {
     const navigate=useNavigate();
     const [load,setLoad]=useState(false);
     const dispatch=useDispatch();
+    const {allCoaches}=useSelector(state=>state.coach);
      const {user}=useSelector(state=>state.auth);
     useEffect(()=>{
          if(!user){
             navigate('/login');
         }
         else{
-            if(user.userrole.toLowerCase()!='teammanager'&&user.userrole.toLowerCase()=="datamanager" && user.userrole.toLowerCase()!='admin'){
+            if(user.userrole.toLowerCase()!='teammanager'&&user.userrole.toLowerCase()!="datamanager" && user.userrole.toLowerCase()!='admin'){
                 toast.error('You are not authorized to view this page');
                 navigate('/');
             }
         }
+        dispatch(getAllCoaches());
     },[])
     const handleSave=()=>{
         if(name.length==0){
@@ -38,6 +40,17 @@ const AddCoach = () => {
         }
         if(picture==""){
             toast.error("Please enter coach picture");
+            return;
+        }
+        //check if coach name already exists
+        let coachExists=false;
+        allCoaches.forEach((coach)=>{
+            if(coach.coachname.toLowerCase()==name.toLowerCase()){
+                coachExists=true;
+            }
+        })
+        if(coachExists){
+            toast.error("Coach already exists");
             return;
         }
         setLoad(true);

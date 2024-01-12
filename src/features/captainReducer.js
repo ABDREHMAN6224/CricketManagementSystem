@@ -13,6 +13,7 @@ const initialState = {
         matches: "all",
         stats: "all",
         team: "all",
+        country: "all"
     },
     errorMessage: "",
 
@@ -89,12 +90,17 @@ const captainSlice = createSlice({
         updateTeam: (state, action) => {
             state.filters.team = action.payload;
         },
+        updateCountry: (state, action) => {
+            state.filters.country = action.payload;
+        },
+
         resetFilters: (state, action) => {
             state.filters = {
                 search: "",
                 matches: "all",
                 stats: "all",
                 team: "all",
+                country: "all"
             }
         },
         updateFilteredCaptains: (state, action) => {
@@ -102,6 +108,7 @@ const captainSlice = createSlice({
             if (state.filters.search) {
                 filteredCaptains = filteredCaptains.filter(captain => captain.playername.toLowerCase().startsWith(state.filters.search));
             }
+
             if (state.filters.matches == "nomatches-desc") {
                 filteredCaptains = filteredCaptains.sort((a, b) => b.matchesascaptain - a.matchesascaptain);
             }
@@ -128,6 +135,9 @@ const captainSlice = createSlice({
             }
             if (state.filters.team != "all") {
                 filteredCaptains = filteredCaptains.filter(captain => captain.teamname == state.filters.team);
+            }
+            if (state.filters.country != "all") {
+                filteredCaptains = filteredCaptains.filter(captain => captain.country?.toLowerCase() == state.filters.country.toLowerCase());
             }
             state.filteredCaptains = filteredCaptains;
 
@@ -222,5 +232,5 @@ const captainSlice = createSlice({
 
 })
 
-export const { updateSearch, updateMatches,removeCurrentCaptain,deleteCurrentCaptain,updateCurrentCaptain, updateStats, updateTeam, resetFilters, updateFilteredCaptains } = captainSlice.actions;
+export const { updateSearch, updateMatches,updateCountry,removeCurrentCaptain,deleteCurrentCaptain,updateCurrentCaptain, updateStats, updateTeam, resetFilters, updateFilteredCaptains } = captainSlice.actions;
 export default captainSlice.reducer;

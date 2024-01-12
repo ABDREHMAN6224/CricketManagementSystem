@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import teamImg from "../../images/team.jpeg"
+import teamImg from "../../images/player.jpg"
 import HeroImage from '../../components/HeroImage'
 import { useDispatch, useSelector } from 'react-redux'
 import { createTeam, getAllTeams } from '../../features/teamReducer'
@@ -49,7 +49,7 @@ const Addteam = () => {
             navigate('/login');
         }
         else{
-            if(user.userrole.toLowerCase()!='teammanager'&&user.userrole.toLowerCase()=="datamanager" && user.userrole.toLowerCase()!='admin'){
+            if(user.userrole.toLowerCase()!='teammanager'&&user.userrole.toLowerCase()!="datamanager" && user.userrole.toLowerCase()!='admin'){
                 toast.error('You are not authorized to view this page');
                 navigate('/');
             }
@@ -136,14 +136,6 @@ const Addteam = () => {
       toast.error("Please enter country");
       return;
     }
-    if(coach.length==0){
-      toast.error("Please enter coach");
-      return;
-    }
-    if(captain.length==0){
-      toast.error("Please enter captain");
-      return;
-    }
     if(wickKeeper.length==0){
       toast.error("Please enter wicket keeper");
       return;
@@ -184,6 +176,7 @@ const Addteam = () => {
       return;
     }
     toast.success("Please Wait while we register your team");
+    
     setTimeout(()=>{
       setLoad(false);
       setSelectTeamModal(true);
@@ -237,9 +230,9 @@ const Addteam = () => {
                     
                     <SelectInput label="Coach Name" placeholder='Enter Coach' value={coach} onChange={(e)=>setCoach(e.target.value)} options={availableCoaches.map(c=>c.coachname)} required/>
                     
-                    <SelectInput label="Captain Name" placeholder='Enter Captain' value={captain} onChange={(e)=>setCaptain(e.target.value)} options={availableCaptains.map(c=>c.playername)} required/>
+                    <SelectInput label="Captain Name" placeholder='Enter Captain' value={captain} onChange={(e)=>setCaptain(e.target.value)} options={availableCaptains.map(c=>c.playername)} />
                   
-                    <SelectInput label="Wicket Keeper Name" placeholder='Enter Wicket Keeper' value={wickKeeper} onChange={(e)=>setWickKeeper(e.target.value)} options={availableWicketKeepers.map(w=>w.playername)} required/>
+                    <SelectInput label="Wicket Keeper Name" placeholder='Enter Wicket Keeper' value={wickKeeper} onChange={(e)=>setWickKeeper(e.target.value)} options={availableWicketKeepers.map(w=>w.playername)} />
                   
                     <div></div>
                     <button className={"btn btn-primary col-span-2"} disabled={error||load} onClick={handleSave}>{error?"Not enough players registered":load?"Please Wait...":"Next"}</button>
@@ -260,7 +253,7 @@ const Addteam = () => {
 export default Addteam
 const Wrapper=styled.div`
 display: grid;
-grid-template-rows: 39vh 1fr;
+grid-template-rows: 50vh 1fr;
 .img{
     object-position:bottom -330px right 0px ;
 }

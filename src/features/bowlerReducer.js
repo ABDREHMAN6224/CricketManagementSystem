@@ -114,7 +114,7 @@ const bowlerSlice = createSlice({
                 filteredBowlers = filteredBowlers.filter(bowler => bowler.playername.toLowerCase().startsWith(filters.search));
             }
             if (filters.team !== "all") {
-                filteredBowlers = filteredBowlers.filter(bowler => bowler.teamname.toLowerCase() === filters.team);
+                filteredBowlers = filteredBowlers.filter(bowler => bowler.teamname?.toLowerCase() === filters.team);
             }
             if (filters.status !== "all") {
                 filteredBowlers = filteredBowlers.filter(bowler => bowler.playerstatus.toLowerCase() === filters.status);

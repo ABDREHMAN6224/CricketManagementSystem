@@ -31,7 +31,7 @@ const AddTournament = () => {
             navigate('/login');
         }
         else{
-            if(user.userrole.toLowerCase()!='tournamentmanager'&&user.userrole.toLowerCase()=="datamanager" && user.userrole.toLowerCase()!='admin'){
+            if(user.userrole.toLowerCase()!='tournamentmanager'&&user.userrole.toLowerCase()!="datamanager" && user.userrole.toLowerCase()!='admin'){
                 toast.error('You are not authorized to view this page');
                 navigate('/');
             }
@@ -112,6 +112,7 @@ const AddTournament = () => {
         setWinningPicture('');
         setWinningTeam(allTeams[0].teamname);
         setWinningTeamId(allTeams[0].teamid);
+        
         setLoad(false);
       },2000)
 

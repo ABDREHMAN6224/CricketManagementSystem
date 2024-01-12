@@ -128,6 +128,9 @@ export const backUpDb = createAsyncThunk("auth/backUpDb", async (d,thunkAPI) => 
                 },
         });
         const blob = new Blob([response.data], { type: 'application/sql' });
+        //download blob file
+
+
         // Create a link element and trigger the download
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);

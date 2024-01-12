@@ -92,21 +92,42 @@ const Dashboard = () => {
             
           <hr className='divider'/>
           </div>
-          <div className="buttons flex flex-col gap-2 mt-5 w-full">
+          <div className="buttons flex flex-col gap-2 mt-0 w-full">
             
             {/* button for matches info */}
             {/* //download er Diagram button */}
-             <button className='nav-link btn btn-outline'
-            onClick={()=>setOpenAddCountryModal(true)}>Add Country</button>
-            <button className='nav-link btn btn-outline mb-6'
+              <button className='nav-link btn btn-outline'
+                onClick={()=>{
+                  setOpenHome(true)
+                  setOpenPlayer(false)
+                }}
+              >Home</button>
+              <button className='nav-link btn btn-outline'
+                onClick={()=>{
+                  setOpenHome(false)
+                  setOpenPlayer(true)
+                }}
+              >Players</button>
+               <button className='nav-link btn btn-outline'
+            onClick={()=>{
+              setOpenHome(false)
+              setOpenPlayer(false)
+            }}>Teams</button>
+            <button className='nav-link btn btn-outline'
               onClick={()=>setOpenAddLocationModal(true)}
             >Add Stadium</button>
-            <button className='nav-link btn btn-success mt-12'
+            <button className='nav-link btn btn-outline mb-0'
+
+            onClick={()=>setOpenAddCountryModal(true)}
+            >Add Country</button>
+
+
+             <button className='nav-link btn btn-success mt-6'
             onClick={()=>setOpenPasswordModal(true)}
             >Backup Database</button>
             <button className='nav-link btn  btn-secondary'
             onClick={()=>setOpenErModal(true)}
-            >View ER Diagram</button>
+            >View ER Diagram</button> 
           </div>
 
         </div>

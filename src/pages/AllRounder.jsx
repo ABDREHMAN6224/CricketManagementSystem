@@ -93,11 +93,12 @@ const {user}=useSelector(state=>state.auth);
             </tr>
         </thead>
         <tbody>
-            {isLoading && <div className="fixed w-full h-full inset-0 flex items-center justify-center">
+            {isLoading && <tr className="fixed w-full h-full inset-0 flex items-center justify-center">
                     <div className="loading"></div>
-                </div>}
+                </tr>}
             {!isLoading && filteredAllRounders.map((batsman,index)=>{
-                const {playerid,country,playername,teamname,allrounderrank,playerpicpath,noruns,totalinningsbatted,oversbowled,runsconceded,playertype}=batsman;
+                const {playerid,country,playername,teamname,allrounderrank,playerpicpath,noruns,totalinningsbatted,oversbowled,runsconceded,playertype,bowltype}=batsman;
+                console.log(bowltype);
                 return(
                     <tr key={index} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                         

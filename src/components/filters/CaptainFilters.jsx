@@ -4,7 +4,8 @@ import SearchInput from '../inputs/SearchInput'
 import SelectInput from '../inputs/SelectInput'
 import Sorting from '../inputs/Sorting'
 import { useDispatch, useSelector } from 'react-redux'
-import { resetFilters, updateMatches, updateSearch, updateStats, updateTeam } from '../../features/captainReducer'
+import { resetFilters, updateMatches, updateSearch, updateStats, updateTeam,updateCountry } from '../../features/captainReducer'
+import { getAllCountries} from '../../features/countryReducer'
 const sortingOptions=[
     {label:"All",value:"all"},
     {label:'No Of Matches High to Low',value:'nomatches-desc'},
@@ -20,6 +21,18 @@ const sortingOptions2=[
     {label:'Ties Low to High',value:'ties-asc'},
 
 ]
+const getUniqueCountries=(allBatsman)=>{
+    let uniqueCountries=["all"];
+    allBatsman.forEach((batsman)=>{
+        if(!uniqueCountries.includes(batsman.country)){
+            uniqueCountries.push(batsman.country);
+        }
+    })
+    //remove any null values
+    uniqueCountries=uniqueCountries.filter(country=>country);
+    
+    return uniqueCountries;
+}
 const CaptainFilters = () => {
     const [search,setSearch]=useState('');
     const [team,setTeam]=useState('all');
@@ -27,8 +40,15 @@ const CaptainFilters = () => {
     const [sort,setSort]=useState('all');
     const [sort2,setSort2]=useState('all');
     const {allCaptains}=useSelector(state=>state.captain);
+    const [country,setCountry]=useState('all');
+    const [countryList,setCountryList]=useState([]);
+    const {allCountries}=useSelector(state=>state.country);
     const dispatch=useDispatch();
-    const getAllCountries=()=>{
+    useEffect(()=>{
+        dispatch(getAllCountries());
+    },[])
+
+    const getAllCountris=()=>{
         let uniqueCountries=['all'];
         let countries=allCaptains.map(captain=>captain.teamname);
         uniqueCountries=[...new Set([...uniqueCountries,...countries])];
@@ -41,10 +61,12 @@ const CaptainFilters = () => {
         setTeam('all');
         setSort('all');
         setSort2('all');
+        setCountry('all');
         dispatch(resetFilters());
     }
     useEffect(()=>{
-        setTeams(getAllCountries());
+        setTeams(getAllCountris());
+        setCountryList(getUniqueCountries(allCaptains));
     },[allCaptains])
     useEffect(()=>{
         dispatch(updateSearch(search));
@@ -58,11 +80,15 @@ const CaptainFilters = () => {
     useEffect(()=>{
         dispatch(updateStats(sort2));
     },[sort2])
+    useEffect(()=>{
+        dispatch(updateCountry(country));
+    },[country])
   return (
 <Wrapper>
         <h3 className='text-3xl from-stone-800'>Filters</h3>
         <SearchInput placeholder={"Search"} label={"Search"} value={search} onChange={(e)=>setSearch(e.target.value)} />
         <SelectInput value={team} onChange={(e)=>setTeam(e.target.value)} options={teams} label={"Team"}/>
+        <SelectInput value={country} onChange={(e)=>setCountry(e.target.value)} options={countryList} label={"Registered Team"}/>
         <Sorting options={sortingOptions} value={sort} onChange={(e)=>setSort(e.target.value)} label='Matches'/>
         <Sorting options={sortingOptions2} value={sort2} onChange={(e)=>setSort2(e.target.value)} label='Stats'/>
         <button className='btn btn-error' onClick={()=>reset()}>Reset Filters</button>

@@ -67,8 +67,8 @@ const PlayerDashboard = () => {
       <div className='w-full flex gap-0 items-center py-1'>
 
         <AreaChartComp data={matchesVsRuns.sort((a,b)=>b.innings-a.innings)}/>
-        <ScatterChartComp data={matchesVsWickets.sort((a,b)=>b.innings-a.innings).slice(0,35)}/>
-        <BarChartComp data={matchesVsEconomy.sort((a,b)=>b.innings-a.innings).slice(0,35)}/>
+        <ScatterChartComp data={matchesVsWickets.sort((a,b)=>b.innings-a.innings)?.slice(0,35)}/>
+        <BarChartComp data={matchesVsEconomy.sort((a,b)=>b.innings-a.innings)?.slice(0,35)}/>
       </div>
     </div>
 )
